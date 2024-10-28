@@ -2,7 +2,8 @@ import {TodoCard} from "./TodoCard.jsx";
 import PropTypes from "prop-types";
 
 export const TodoList = (props) => {
-    const {todos} = props;
+    const { todos } = props
+
 
     return (
         <ul className="main">
@@ -17,6 +18,3 @@ export const TodoList = (props) => {
     )
 }
 
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.string).isRequired,
-};

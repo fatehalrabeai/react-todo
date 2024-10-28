@@ -10,8 +10,7 @@ function App() {
     const [todoValue, setTodoValue] = useState('')
 
     const persistData = (newList) => {
-        localStorage.getItem('todos',
-            JSON.stringify({ todos: newList})
+        localStorage.setItem('todos', JSON.stringify({ todos: newList})
         )
     }
     const handleAddTodos = (newTodo) => {
@@ -37,22 +36,24 @@ function App() {
 
     useEffect(() => {
         if (!localStorage) {
-            return
+            return;
         }
 
-        let localTodos = localStorage.getItem('todos')
+        let localTodos = localStorage.getItem('todos');
+        console.log('todos: ' + localTodos);
         if (!localTodos) {
-          return;
+            return;
         }
-        localTodos = JSON.parse(localTodos).index
-        setTodos(localTodos)
 
-    }, [])
+        localTodos = JSON.parse(localTodos).todos; // Access the correct key here
+        setTodos(localTodos);
+    }, []);
 
   return (
     <main>
         <TodoInput todoValue={todoValue} setTodoValue={setTodoValue} handleAddTodos={handleAddTodos}/>
-        <TodoList handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} todos={todos} />
+        <TodoList handleEditTodo={handleEditTodo}
+                  handleDeleteTodo={handleDeleteTodo} todos={todos} />
     </main>
   )
 }
